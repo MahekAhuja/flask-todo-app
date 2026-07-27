@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fancy Todo App</title>
+    
+    <!-- Bootstrap & Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+        .btn-primary {
+            background: #ff4081;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background: #e91e63;
+        }
+        .todo-item {
+            background: rgba(255, 255, 255, 0.9); /* Changed to solid white */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            color: black; /* Ensures text is visible */
+        }
+        .delete-btn {
+            background: #ff5252;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+        }
+        .delete-btn:hover {
+            background: #d32f2f;
+        }
+        .todo-list {
+            max-height: 300px;
+            overflow-y: auto; /* Allows scrolling if too many items */
+            padding-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>✨ Fancy Todo List ✨</h1>
+
+        <!-- Form to Add a New Task -->
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Task Title" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="desc" name="desc" placeholder="Task Description" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Add Task</button>
+        </form>
+
+        <!-- Display Todos -->
+        <h2 class="mt-4">Your Todos</h2>
+        <div class="todo-list">
+            {% for todo in allTodo %}
+            <div class="todo-item">
+                <div>
+                    <h5>{{ todo.title }}</h5>
+                    <p>{{ todo.desc }}</p>
+                    <small>{{ todo.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                </div>
+                <a href="/delete/{{ todo.sno }}" class="delete-btn">❌</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
